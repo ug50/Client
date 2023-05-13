@@ -1,0 +1,10 @@
+complexity:
+  active: true
+  ComplexMethod:
+    active: true
+    threshold: 50
+
+style:
+  active: true
+  UnnecessaryParentheses:
+    active: false
