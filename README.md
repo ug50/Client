@@ -1,24 +1,39 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/kami-blue/client/badge)](https://www.codefactor.io/repository/github/kami-blue/client)
-[![build](https://github.com/kami-blue/client/workflows/gradle_build/badge.svg)](https://github.com/kami-blue/client/actions)
-[![Discord Mine](https://img.shields.io/discord/573954110454366214?label=chat&logo=discord&logoColor=white)](https://discord.gg/KfpqwZB)
-[![HitCount](http://hits.dwyl.com/kami-blue/client.svg)](http://hits.dwyl.com/kami-blue/client)
-[![Paypal](https://img.shields.io/badge/paypal-donate-red?color=169bd7&logo=paypal)](https://paypal.me/mik4a/5USD)
+# ForgeHax
+[![](https://img.shields.io/badge/download-1.12.2%20latest-blue.svg?logo=java)](https://jenkins.nhackindustries.com/job/ForgeHax/job/master/lastSuccessfulBuild/)
+[![](https://img.shields.io/badge/download-1.15.2%20latest-blue.svg?logo=java)](https://jenkins.nhackindustries.com/job/ForgeHax/job/1.15/lastSuccessfulBuild/artifact/build/libs/)
+[![Build Status](https://jenkins.nhackindustries.com/buildStatus/icon?job=ForgeHax/master)](https://jenkins.nhackindustries.com/job/ForgeHax/job/master)
+[![](https://img.shields.io/matrix/forgehax:nerdsin.space.svg?label=%23forgehax%3Anerdsin.space&logo=matrix)](https://matrix.to/#/#forgehax:nerdsin.space)
 
-Please consider donating to help continue this project and get a unique cape in game. 
+A Minecraft cheat that runs as a Forge mod.
 
-## Contributing
+## Installing
 
-Please go to [kamiblue.org/contributing](https://kamiblue.org/contributing) for building / contributing instructions.
+1. Download the latest version of [Minecraft Forge](https://files.minecraftforge.net/) for the corresponding ForgeHax Minecraft version (this is important if you want to run older versions of ForgeHax).
+2. Download the latest ForgeHax build ([1.12-master](https://jenkins.nhackindustries.com/job/ForgeHax/job/master/lastSuccessfulBuild/), [1.15](https://jenkins.nhackindustries.com/job/ForgeHax/job/1.15/lastSuccessfulBuild/artifact/build/libs/)). Do NOT install the jar that ends with `-sources.jar`. That one contains the source code and isn't compiled.
+3. Place the ForgeHax jar into the `.minecraft/mods/` directory. If you want to organize by Minecraft version, you can place it under `.minecraft/mods/{mc.version}` where `mc.version` is the version of Minecraft running (ex: `.minecraft/mods/1.12.2`).
+4. Launch Minecraft using the Forge profile. ForgeHax should now be loaded.
 
-## Thank you
+## Wiki
 
-[zeroeightysix](https://github.com/zeroeightysix) for the original [KAMI](https://github.com/zeroeightysix/KAMI)
+If you need any help, please check the [ForgeHax Wiki](https://github.com/fr1kin/ForgeHax/wiki) before submitting an issue.
 
-[ronmamo](https://github.com/ronmamo/) for [Reflections](https://github.com/ronmamo/reflections)
+## Known Issues
 
-The [Minecraft Forge team](https://github.com/MinecraftForge) for [forge](https://files.minecraftforge.net/)
+World Downloader Forge is a mod known to wreak havoc on ForgeHax's asm tweaker. There is some race condition it has with Mixin causing ForgeHax to only successfully transform classes sometimes. Luckly this is the only known mod known to cause this issue, and other Mixin based tweakers work fine with ForgeHax (i.e Liteloader, Future). 
 
-All the [contributors](https://github.com/kami-blue/client/graphs/contributors), including the ones who will be remembered in comments and in our hearts. This has been a huge community effort and I couldn't have done it without them.
+## Building
+Java 8 Version 131+ is required. Make sure your JAVA_HOME is set to this version of the JDK. If you don't, setupDecompWorkspace will fail at recompileMc.
 
-## Star Chart
-[![Stargazers over time](https://starchart.cc/kami-blue/client.svg)](https://starchart.cc/kami-blue/client)
+You should allocate more ram when running `setupDecompWorkspace` (around 4GB should be ok)
+
+I recommend allocating more ram in both environments as the Markers mod requires a lot of memory for the vertex buffers. I might get around to fixing this if it becomes too big of an issue.
+
+#### Common build issues
+
+##### config.properties tokens are not applied
+
+Sometimes when building, the config.properties resource will not be tokenized. This will break the tweaker because it wont know what mapping version to use. This can be fixed by cleaning your gradle and IDE build output and running setupDecompWorkspace again.
+
+## FAQ
+
+Read the FAQ on the [wiki](https://github.com/fr1kin/ForgeHax/wiki/FAQ)
